@@ -29,9 +29,13 @@ from `p`’s individual baseline. That is, given a PVT session `s` for a partici
 `p` with a median reaction time for that session of `MRT`<sub>s,p</sub>,
 the corresponding RRT is calculated as:
 
-![RRT Equation](/images/eq-rrt.png?raw=true)
+<p align="center">
+  ![RRT Equation](/images/eq-rrt.png?raw=true)
+</p>
 
 Here, MMRT<sub>p</sub> is the mean `MRT` averaged across all `N` sessions from
 participant `p`:
 
-![MMRT equation](/images/eq-mmrt.png?raw=True)
+<p align="center">
+  ![MMRT equation](/images/eq-mmrt.png?raw=True)
+</p>
