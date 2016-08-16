@@ -18,16 +18,20 @@ The steps of computing RRT from PVT response time are as follows:
 * The first step involves removing _false starts_ — cases where users
 responded (wrongly) before the stimulus has been shown.
 * Since a PVT session includes multiple visual stimuli tests,
-we calculate the median response time (`MRT`<sup>s,p</sup>) for each
+we calculate the median response time (`MRT`<sub>s,p</sub>) for each
 session `s` per person `p`.
-* We then remove outlier sessions with `MRT`<sup>s,p</sup> falling outside
+* We then remove outlier sessions with `MRT`<sub>s,p</sub> falling outside
 (mean ± 2.5 × SD) for each participant.
-* Next, we take the mean `MRT`<sup>s,p</sup> across all of participant `p`’s
+* Next, we take the mean `MRT`<sub>s,p</sub> across all of participant `p`’s
 sessions to establish an individual baseline for participant `p`.
 * Finally, we compute the RRT of a given session as its percentage deviation
 from `p`’s individual baseline. That is, given a PVT session `s` for a participant
-`p` with a median reaction time for that session of `MRT`<sup>s,p</sup>,
-the corresponding RRT is calculated as: ![RRT Equation](/images/eq-rrt.png?raw=true)
+`p` with a median reaction time for that session of `MRT`<sub>s,p</sub>,
+the corresponding RRT is calculated as:
 
-Here, MMRT<sup>p</sup> is the mean `MRT` averaged across all `N` sessions from
-participant `p`: ![MMRT equation](/images/eq-mmrt.png?raw=True)
+![RRT Equation](/images/eq-rrt.png?raw=true)
+
+Here, MMRT<sub>p</sub> is the mean `MRT` averaged across all `N` sessions from
+participant `p`:
+
+![MMRT equation](/images/eq-mmrt.png?raw=True)
