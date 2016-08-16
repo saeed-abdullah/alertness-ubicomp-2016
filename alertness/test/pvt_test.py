@@ -103,3 +103,48 @@ class PvtTest(unittest.TestCase):
         expected = pd.DataFrame(e)
         self._assert_dataframe_equality(actual, expected,
                                         float_cols=['response_time'])
+
+    def test_get_relative_response_time(self):
+        l = [{'response_time': 20, 'user_id': 1, 'session': 1},
+             {'response_time': 40, 'user_id': 1, 'session': 2},
+             {'response_time': 60, 'user_id': 2, 'session': 100}]
+
+        df = pd.DataFrame(l)
+
+        # mean for user 1 is 30
+        expected = [(30 - 20)/30 * 100, (30 - 40)/30 * 100, 0]
+        actual = pvt.get_relative_response_time(df)
+
+        self.assertTrue(np.allclose(expected, actual))
+
+    def test_process_pvt(self):
+        l = [{'response_time': 10, 'user_id': 1, 'session': 1},
+             {'response_time': 20, 'user_id': 1, 'session': 1},
+             {'response_time': 25, 'user_id': 1, 'session': 1},
+             {'response_time': 40, 'user_id': 1, 'session': 2}]
+
+        df = pd.DataFrame(l)
+
+        # median
+        e = [{'response_time': 20, 'user_id': 1, 'session': 1},
+             {'response_time': 40, 'user_id': 1, 'session': 2}]
+
+        expected = pd.DataFrame(e)
+        expected['rrt'] = [(30 - 20)/30 * 100, (30 - 40)/30 * 100]
+
+        actual = pvt.process_pvt(df)
+        self._assert_dataframe_equality(expected, actual, float_cols=['rrt'])
+
+        # check for early starts
+        l.append({'response_time': -100, 'user_id': 1, 'session': 1})
+        df = pd.DataFrame(l)
+
+        actual = pvt.process_pvt(df)
+        self._assert_dataframe_equality(expected, actual, float_cols=['rrt'])
+
+        # check for outlier session
+        l.append({'response_time': 300, 'user_id': 1, 'session': 3})
+        df = pd.DataFrame(l)
+
+        actual = pvt.process_pvt(df, filtering_factor=1.1)
+        self._assert_dataframe_equality(expected, actual, float_cols=['rrt'])
