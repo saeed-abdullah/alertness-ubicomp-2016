@@ -30,7 +30,6 @@ from `p`’s individual baseline. That is, given a PVT session `s` for a partici
 the corresponding RRT is calculated as:
 
 <p align="center">
-![RRT Equation](/images/eq-rrt.png?raw=true)
 <img src="https://github.com/saeed-abdullah/alertness-ubicomp-2016/blob/master/images/eq-rrt.png">
 </p>
 
@@ -38,6 +37,5 @@ Here, MMRT<sub>p</sub> is the mean `MRT` averaged across all `N` sessions from
 participant `p`:
 
 <p align="center">
-![MMRT equation](/images/eq-mmrt.png?raw=True)
 <img src="https://github.com/saeed-abdullah/alertness-ubicomp-2016/blob/master/images/eq-mmrt.png">
 </p>
